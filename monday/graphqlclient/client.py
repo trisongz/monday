@@ -1,6 +1,6 @@
 import requests
 import json
-
+from fileio import File
 
 class GraphQLClient:
     def __init__(self, endpoint):
@@ -29,7 +29,7 @@ class GraphQLClient:
         elif variables.get('file', None) is not None:
             headers['content'] = 'multipart/form-data'
             files = [
-                ('variables[file]', (variables['file'], open(variables['file'], 'rb')))
+                ('variables[file]', (variables['file'], File.rb(variables['file'])))
             ]
 
         try:
